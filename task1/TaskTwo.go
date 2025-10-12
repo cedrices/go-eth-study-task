@@ -5,7 +5,6 @@ import (
 	"crypto/ecdsa"
 	"log"
 	"math/big"
-	"time"
 
 	"github.com/cedric/go-eth-study-task/counter"
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
@@ -67,10 +66,10 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	auth := getAuth(client)
-	counterInstance.Add(auth, big.NewInt(20))
-	time.Sleep(5 * time.Second)
-	counts, err := counterInstance.Get(nil)
+	// auth := getAuth(client)
+	// counterInstance.Add(auth, big.NewInt(20))
+	// time.Sleep(5 * time.Second)
+	counts, err := counterInstance.Get(&bind.CallOpts{Context: context.Background()})
 
 	log.Println("counts:", counts)
 }
